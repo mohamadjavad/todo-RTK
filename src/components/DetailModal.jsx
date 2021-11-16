@@ -5,23 +5,13 @@ import {
   useAppDispatch,
   toggle,
   remove,
-  update,
-  addTodo,
   editId,
   showEditModal,
   showDetailModal,
 } from "../store";
-import {
-  Button,
-  Chip,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Button, Chip, Dialog, Grid, Typography } from "@mui/material";
 
-import { Check, TramRounded } from "@mui/icons-material";
+import { Check } from "@mui/icons-material";
 
 function DetailModal() {
   const todos = useAppSelector((state) => state.todos);

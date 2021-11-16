@@ -1,19 +1,12 @@
 import * as React from "react";
-import { TodoContext } from "../store";
+
 import DoneTasksModal from "./DoneTasksModal";
-import {
-  useAppSelector,
-  useAppDispatch,
-  update,
-  remove,
-  toggle,
-} from "../store";
+import { useAppSelector } from "../store";
 
 import { Typography, Grid, Button } from "@mui/material";
 
 function TopBar() {
   const todos = useAppSelector((state) => state.todos);
-  const dispatch = useAppDispatch();
 
   const [showDoneModal, setShowDoneModal] = React.useState(false);
   let doneList = todos?.filter((item) => item.done === true);

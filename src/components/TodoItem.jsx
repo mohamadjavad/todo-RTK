@@ -1,23 +1,17 @@
 import React from "react";
 import { Button, Chip, Grid, Typography } from "@mui/material";
-import { TodoContext, toggleTodo } from "../store";
+
 import { Check } from "@mui/icons-material";
 
-import DetailModal from "./DetailModal";
 import {
-  useAppSelector,
   useAppDispatch,
   toggle,
-  update,
-  addTodo,
   editId,
   showEditModal,
   showDetailModal,
 } from "../store";
 
-const TodoItem = ({ todo, key }) => {
-  const todos = useAppSelector((state) => state.todos);
-  const showDetailModalvalue = useAppSelector((state) => state.showDetailModal);
+const TodoItem = ({ todo, key, hide }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -89,44 +83,46 @@ const TodoItem = ({ todo, key }) => {
             />
           </Grid>
         </Grid>
-        <Grid
-          mt={1}
-          item
-          container
-          justifyContent="flex-end"
-          spacing={2}
-          direction="row"
-          flexWrap="nowrap"
-        >
-          <Grid item>
-            <Button
-              size="small"
-              variant="contained"
-              color={todo.done === true ? "success" : "secondary"}
-              onClick={() => {
-                dispatch(toggle(todo.id));
-                dispatch(showDetailModal(false));
-              }}
-            >
-              {todo.done === true ? "Well Done" : "Done Task"}
-              {todo.done === true ? <Check /> : <> </>}
-            </Button>
+        {!hide && (
+          <Grid
+            mt={1}
+            item
+            container
+            justifyContent="flex-end"
+            spacing={2}
+            direction="row"
+            flexWrap="nowrap"
+          >
+            <Grid item>
+              <Button
+                size="small"
+                variant="contained"
+                color={todo.done === true ? "success" : "secondary"}
+                onClick={() => {
+                  dispatch(toggle(todo.id));
+                  dispatch(showDetailModal(false));
+                }}
+              >
+                {todo.done === true ? "Well Done" : "Done Task"}
+                {todo.done === true ? <Check /> : <> </>}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  dispatch(showEditModal(true));
+                  dispatch(showDetailModal(false));
+                  dispatch(editId(todo.id));
+                }}
+              >
+                Edit Task
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                dispatch(showEditModal(true));
-                dispatch(showDetailModal(false));
-                dispatch(editId(todo.id));
-              }}
-            >
-              Edit Task
-            </Button>
-          </Grid>
-        </Grid>
+        )}
       </Grid>
     </Grid>
   );

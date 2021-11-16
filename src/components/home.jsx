@@ -4,11 +4,8 @@ import { Container, Grid, Button } from "@mui/material";
 import {
   useAppSelector,
   useAppDispatch,
-  update,
-  addTodo,
   editId,
   showEditModal,
-  showDetailModal,
 } from "../store";
 
 import AddModal from "./AddModal";
@@ -16,12 +13,9 @@ import TopBar from "./TopBar";
 import TodoListItems from "./TodoList";
 
 const App = () => {
-  const editIdvalue = useAppSelector((state) => state.editId);
-  const showEditModalValue = useAppSelector((state) => state.showEditModal);
-
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => state.todos);
-  // console.log(value);
+
   return (
     <>
       <Container fixed>
